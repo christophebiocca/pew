@@ -116,10 +116,7 @@ class InveParser(RawConfigParser):
         return option
 
     def section_items(self, section, variables):
-        if section not in self:
-            return []
-
-        for k in self[section]:
+        for k in self.get(section,()):
             yield (k, Template(self.get(section, k)).safe_substitute(variables))
 
 def inve(env, command, *args, **kwargs):
